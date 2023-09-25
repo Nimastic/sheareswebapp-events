@@ -6,7 +6,7 @@ import Login from './src/pages/login/Login';
 const Stack = createNativeStackNavigator();
 
 const getAuth = (): boolean => {
-    return true;
+    return false;
 }
 
 export default function App() {
