@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 
 const styles = StyleSheet.create({
     container: {
@@ -11,13 +12,12 @@ const styles = StyleSheet.create({
 });
 
 
-const Home: React.FC = () => {
+const Loading: React.FC = () => {
     return (
         <View style={styles.container}>
-            <Text>Open up App.js to start working on yopur app!home</Text>
-            <StatusBar style="auto" />
+            <Button loading>Loading</Button>
         </View>
     );
 }
 
-export default Home;
+export default Loading;

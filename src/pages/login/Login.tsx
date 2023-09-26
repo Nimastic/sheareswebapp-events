@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { TextInput, Text, Button } from 'react-native-paper';
+import AuthContext from '../../auth/AuthContext';
 
 const styles = StyleSheet.create({
     container: {
@@ -21,7 +22,10 @@ const styles = StyleSheet.create({
 
 
 const Login: React.FC = () => {
-    const onLogin = () => { }
+    const { signIn } = useContext(AuthContext);
+    const onLogin = () => {
+        signIn({ email, password });
+    }
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 

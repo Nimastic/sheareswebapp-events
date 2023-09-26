@@ -11,13 +11,13 @@ const styles = StyleSheet.create({
 });
 
 
-const Home: React.FC = () => {
+const Calendar: React.FC = () => {
     return (
         <View style={styles.container}>
-            <Text>Open up App.js to start working on yopur app!home</Text>
+            <Text>Open up App.js to start working on yopur app!</Text>
             <StatusBar style="auto" />
         </View>
     );
 }
 
-export default Home;
+export default Calendar;
