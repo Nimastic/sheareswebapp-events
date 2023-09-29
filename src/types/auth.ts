@@ -1,10 +1,12 @@
-interface IAuthContext {
+import { User } from "firebase/auth";
+
+export interface IAuthContext {
     signIn: (data: any) => Promise<void>;
-    signOut: (data: any) => void;
+    signOut: () => void;
 }
 
-interface AuthState {
+export interface AuthState {
     isLoading: boolean;
     isSignout: boolean;
-    userToken: string | null;
+    user: User | null;
 }

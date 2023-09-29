@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ShearesAppFrontend",
-    "slug": "ShearesAppFrontend",
+    "name": "shearesappfrontend",
+    "slug": "com.test.shearesapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,16 +15,24 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.test.shearesapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.test.shearesapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "091d7b0e-4c6d-4c48-a7b4-14f1142e9e8e"
+      }
+    },
+    "scheme": "com.test.shearesapp"
   }
 }

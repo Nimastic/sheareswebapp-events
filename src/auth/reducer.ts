@@ -1,9 +1,10 @@
-import { AuthActionTypes, RESTORE_TOKEN, SIGN_IN, SIGN_OUT } from "./types";
+import { AuthState } from "../types/auth";
+import { AuthActionTypes, LOADING, RESTORE_TOKEN, SIGN_IN, SIGN_OUT } from "./types";
 
 export const initialState: AuthState = {
     isLoading: true,
     isSignout: false,
-    userToken: null,
+    user: null,
 }
 
 export const reducer = (state: AuthState, action: AuthActionTypes) => {
@@ -11,20 +12,27 @@ export const reducer = (state: AuthState, action: AuthActionTypes) => {
         case RESTORE_TOKEN:
             return {
                 ...state,
-                userToken: action.token,
+                user: action.user,
                 isLoading: false,
             };
         case SIGN_IN:
             return {
                 ...state,
                 isSignout: false,
-                userToken: action.token,
+                user: action.user,
+                isLoading: false,
             };
         case SIGN_OUT:
             return {
                 ...state,
                 isSignout: true,
-                userToken: null,
+                user: null,
+                isLoading: false,
+            };
+        case LOADING:
+            return {
+                ...state,
+                isLoading: true,
             };
     }
 };
