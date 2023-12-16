@@ -1,0 +1,1 @@
+NEED a setup guide please. idek whats going on anymore
