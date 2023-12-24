@@ -12,6 +12,8 @@ import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import { GoogleAuthProvider, User, onAuthStateChanged, signInWithCredential, signOut } from "firebase/auth";
 import { firebaseAuth } from "./firebaseConfig";
+import { TamaguiProvider } from 'tamagui';
+import config from './tamagui.config'
 
 const Stack = createNativeStackNavigator();
 WebBrowser.maybeCompleteAuthSession();
@@ -95,25 +97,27 @@ export default function App() {
     if (state.isLoading) return <Loading />;
 
     return (
-        <AuthContext.Provider value={authContext}>
-            <NavigationContainer>
-                <Stack.Navigator>
-                    {
-                        state.user === null
-                            ?
-                            <>
-                                <Stack.Screen name="Login">
-                                    {(props) => <Login {...props} promptAsync={promptAsync} />}
-                                </Stack.Screen>
-                            </>
-                            :
-                            <>
-                                <Stack.Screen name="Home" component={Home} />
-                                <Stack.Screen name="Calendar" component={Calendar} />
-                            </>
-                    }
-                </Stack.Navigator>
-            </NavigationContainer>
-        </AuthContext.Provider>
+        <TamaguiProvider config={config}>
+            <AuthContext.Provider value={authContext}>
+                <NavigationContainer>
+                    <Stack.Navigator>
+                        {
+                            state.user === null
+                                ?
+                                <>
+                                    <Stack.Screen name="Login" options={{ headerShown: false }}>
+                                        {(props) => <Login {...props} promptAsync={promptAsync} />}
+                                    </Stack.Screen>
+                                </>
+                                :
+                                <>
+                                    <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+                                    <Stack.Screen name="Calendar" component={Calendar}  options={{ headerShown: false }} />
+                                </>
+                        }
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </AuthContext.Provider>
+        </TamaguiProvider>
     );
 }
