@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'tamagui';
 
 const styles = StyleSheet.create({
     container: {
@@ -11,13 +11,12 @@ const styles = StyleSheet.create({
     },
 });
 
-
 const Loading: React.FC = () => {
     return (
         <View style={styles.container}>
-            <Button loading>Loading</Button>
+            <Text>Loading...</Text>
         </View>
     );
-}
+};
 
 export default Loading;

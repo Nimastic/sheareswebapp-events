@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
     },
 });
 
-
 const Home: React.FC = () => {
     const { signOut } = useContext(AuthContext);
     return (
@@ -23,6 +22,6 @@ const Home: React.FC = () => {
             <Text onPress={async () => await signOut()}>SIGN OUT</Text>
         </View>
     );
-}
+};
 
 export default Home;
