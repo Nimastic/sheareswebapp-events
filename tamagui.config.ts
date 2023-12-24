@@ -1,7 +1,28 @@
-import { createInterFont } from '@tamagui/font-inter';
 import { shorthands } from '@tamagui/shorthands';
-import { themes, tokens } from '@tamagui/themes';
-import { createFont, createTamagui } from 'tamagui';
+import { tokens } from '@tamagui/themes';
+import { createFont, createTamagui, createTokens } from 'tamagui';
+
+const themes = {
+    light: {
+        orange: '#F18437',
+        white: '#FFFFFF',
+        black: '#000000',
+        yellow: '#F8D148',
+        blue: '#4AB3FF',
+        darkgray: '#393939',
+        lightgray: '#E9E8E4',
+    },
+    dark: {
+        // change this when we need to
+        orange: '#F18437',
+        white: '#FFFFFF',
+        black: '#000000',
+        yellow: '#F8D148',
+        blue: '#4AB3FF',
+        darkgray: '#393939',
+        lightgray: '#E9E8E4',
+    },
+};
 
 const headingFont = createFont({
     family: 'NotoSans, Helvetica, sans-serif',
@@ -48,14 +69,6 @@ const bodyFont = createFont({
     letterSpacing: {
         4: 0,
         8: -1,
-    },
-
-    // for native only, alternate family based on weight/style
-    face: {
-        // pass in weights as keys
-        700: { normal: 'InterBold', italic: 'InterBold-Italic' },
-        800: { normal: 'InterBold', italic: 'InterBold-Italic' },
-        900: { normal: 'InterBold', italic: 'InterBold-Italic' },
     },
 });
 

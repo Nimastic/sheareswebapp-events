@@ -127,7 +127,7 @@ export default function App() {
     if (state.isLoading) return <Loading />;
 
     return (
-        <TamaguiProvider config={config}>
+        <TamaguiProvider config={config} defaultTheme="light">
             <AuthContext.Provider value={authContext}>
                 <NavigationContainer>
                     <Stack.Navigator>
