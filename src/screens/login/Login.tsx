@@ -13,13 +13,12 @@ const Login: React.FC<LoginProps> = ({ promptAsync }) => {
             alignItems="center"
             justifyContent="center"
             gap="$4"
-            backgroundColor={theme.white}
         >
             <XStack paddingHorizontal="$5">
-                <H2>Log in</H2>
+                <H2 color={theme.black}>Log in</H2>
             </XStack>
             <XStack paddingHorizontal="$5">
-                <Text>Welcome back!</Text>
+                <Text color={theme.black}>Welcome back!</Text>
             </XStack>
             <XStack alignSelf="center">
                 <Button
