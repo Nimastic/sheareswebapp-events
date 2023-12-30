@@ -31,7 +31,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 WebBrowser.maybeCompleteAuthSession();
 
 export default function App() {
@@ -39,6 +39,7 @@ export default function App() {
         NotoSans: require('./src/fonts/NotoSans-VariableFont_wdth,wght.ttf'),
     });
 
+    // Once fonts loaded, load the app (hide splash screen)
     useEffect(() => {
         const checkFontsLoaded = async () => {
             if (fontsLoaded) {
