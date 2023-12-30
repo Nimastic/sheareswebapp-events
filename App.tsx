@@ -26,6 +26,7 @@ import {
 import { firebaseAuth } from './firebaseConfig';
 import { TamaguiProvider } from 'tamagui';
 import config from './tamagui.config';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -129,38 +130,40 @@ export default function App() {
     return (
         <TamaguiProvider config={config} defaultTheme="light">
             <AuthContext.Provider value={authContext}>
-                <NavigationContainer>
-                    <Stack.Navigator>
-                        {state.user === null ? (
-                            <>
-                                <Stack.Screen
-                                    name="Login"
-                                    options={{ headerShown: false }}
-                                >
-                                    {(props) => (
-                                        <Login
-                                            {...props}
-                                            promptAsync={promptAsync}
-                                        />
-                                    )}
-                                </Stack.Screen>
-                            </>
-                        ) : (
-                            <>
-                                <Stack.Screen
-                                    name="Home"
-                                    component={Home}
-                                    options={{ headerShown: false }}
-                                />
-                                <Stack.Screen
-                                    name="Calendar"
-                                    component={Calendar}
-                                    options={{ headerShown: false }}
-                                />
-                            </>
-                        )}
-                    </Stack.Navigator>
-                </NavigationContainer>
+                <SafeAreaProvider>
+                    <NavigationContainer>
+                        <Stack.Navigator>
+                            {state.user === null ? (
+                                <>
+                                    <Stack.Screen
+                                        name="Login"
+                                        options={{ headerShown: false }}
+                                    >
+                                        {(props) => (
+                                            <Login
+                                                {...props}
+                                                promptAsync={promptAsync}
+                                            />
+                                        )}
+                                    </Stack.Screen>
+                                </>
+                            ) : (
+                                <>
+                                    <Stack.Screen
+                                        name="Home"
+                                        component={Home}
+                                        options={{ headerShown: false }}
+                                    />
+                                    <Stack.Screen
+                                        name="Calendar"
+                                        component={Calendar}
+                                        options={{ headerShown: false }}
+                                    />
+                                </>
+                            )}
+                        </Stack.Navigator>
+                    </NavigationContainer>
+                </SafeAreaProvider>
             </AuthContext.Provider>
         </TamaguiProvider>
     );
