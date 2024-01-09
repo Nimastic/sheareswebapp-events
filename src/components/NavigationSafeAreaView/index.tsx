@@ -1,7 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import AuthContext from '../../auth/AuthContext';
+import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface NavigationSafeAreaViewProps {
