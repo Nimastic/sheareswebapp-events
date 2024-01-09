@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import AuthContext from '../../auth/AuthContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../types/navigation';
 
 const styles = StyleSheet.create({
     container: {
@@ -16,13 +17,16 @@ const styles = StyleSheet.create({
 
 const Home: React.FC = () => {
     const { signOut } = useContext(AuthContext);
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Home'>>();
+    const navigation =
+        useNavigation<StackNavigationProp<RootStackParamList, 'Home'>>();
 
     return (
         <View style={styles.container}>
             <Text>Open up App.js to start working on yopur app!home</Text>
             <StatusBar style="auto" />
-            <Text onPress={async () => navigation.navigate('Calendar')}>CALENDAR</Text>
+            <Text onPress={async () => navigation.navigate('Calendar')}>
+                CALENDAR
+            </Text>
             <Text onPress={async () => await signOut()}>SIGN OUT</Text>
         </View>
     );
