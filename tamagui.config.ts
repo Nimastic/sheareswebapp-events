@@ -1,19 +1,39 @@
 import { shorthands } from '@tamagui/shorthands';
-import { tokens } from '@tamagui/themes';
-import { createFont, createTamagui, createTokens } from 'tamagui';
+import { tokens as defaultTokens } from '@tamagui/themes';
+import { createFont, createTamagui } from 'tamagui';
+
+const tokens = {
+    ...defaultTokens,
+    color: {
+        white: '#FFFFFF',
+        lightgray: '#E9E8E4',
+        darkgray: '#393939',
+        black: '#000000',
+        orangeLight: '#F18437',
+        yellowLight: '#F8D148',
+        blueLight: '#4AB3FF',
+        // change dark values later on
+        orangeDark: '#F18437',
+        yellowDark: '#F8D148',
+        blueDark: '#4AB3FF',
+    },
+};
 
 const themes = {
     light: {
-        orange: '#F18437',
-        white: '#FFFFFF',
-        black: '#000000',
-        yellow: '#F8D148',
-        blue: '#4AB3FF',
-        darkgray: '#393939',
-        lightgray: '#E9E8E4',
+        background: tokens.color.white,
+        backgroundPress: tokens.color.lightgray,
+        color: tokens.color.black,
     },
+    light_orange: {
+        background: tokens.color.orangeLight,
+        // this is a darker shade of orange and should eventually be replaced with a colour gradient, i.e. orange1Light, orange2Light, etc
+        // let uiux team decide on the colour values
+        backgroundPress: '#EF731A',
+        color: tokens.color.white,
+    },
+    // change this when we need to
     dark: {
-        // change this when we need to
         orange: '#F18437',
         white: '#FFFFFF',
         black: '#000000',

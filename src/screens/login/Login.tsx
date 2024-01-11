@@ -6,7 +6,6 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ promptAsync }) => {
-    const theme = useTheme();
     return (
         <NavigationSafeAreaView>
             <YStack
@@ -17,17 +16,16 @@ const Login: React.FC<LoginProps> = ({ promptAsync }) => {
                 gap="$4"
             >
                 <XStack paddingHorizontal="$5">
-                    <H2 color={theme.black}>Log in</H2>
+                    <H2>Log in</H2>
                 </XStack>
                 <XStack paddingHorizontal="$5">
-                    <Text color={theme.black}>Welcome back!</Text>
+                    <Text>Welcome back!</Text>
                 </XStack>
                 <XStack alignSelf="center">
                     <Button
+                        theme="orange"
                         size="$6"
                         onPress={() => promptAsync()}
-                        backgroundColor={theme.orange}
-                        color={theme.white}
                     >
                         Sign In with Google
                     </Button>
