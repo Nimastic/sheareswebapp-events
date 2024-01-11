@@ -8,7 +8,6 @@ import { MarkedDates } from 'react-native-calendars/src/types';
 import { useTheme } from 'tamagui';
 
 const Calendar: React.FC = () => {
-    const theme = useTheme();
     const navigation =
         useNavigation<StackNavigationProp<RootStackParamList, 'Calendar'>>();
 
@@ -42,14 +41,7 @@ const Calendar: React.FC = () => {
 
         const combinedMarkedDates: MarkedDates = {
             '2023-12-15': {
-                dots: [
-                    shearesEventDot,
-                    shearesEventDot,
-                    shearesEventDot,
-                    shearesEventDot,
-                    shearesEventDot,
-                    personalEventDot,
-                ],
+                dots: [shearesEventDot, personalEventDot],
             },
             '2024-01-15': { dots: [shearesEventDot, personalEventDot] },
         };
