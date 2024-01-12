@@ -45,12 +45,14 @@ const themes = {
 };
 
 const headingFont = createFont({
-    family: 'NotoSans, Helvetica, sans-serif',
+    family: 'NotoSans',
     size: {
-        5: 13,
-        6: 15,
-        9: 32,
-        10: 44,
+        5: 16, // H6 size
+        6: 18,
+        7: 20,
+        8: 23,
+        9: 30,
+        10: 46, // H1 size
     },
     weight: {
         4: '300',
@@ -63,7 +65,7 @@ const headingFont = createFont({
 });
 
 const bodyFont = createFont({
-    family: 'NotoSans, Helvetica, sans-serif',
+    family: 'NotoSans',
     size: {
         1: 11,
         2: 12,

@@ -4,10 +4,15 @@ import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types/navigation';
 import {
     Button,
+    H1,
     H2,
+    H3,
+    H4,
+    H5,
     H6,
     ListItem,
     ScrollView,
+    Separator,
     Theme,
     YGroup,
     YStack,
@@ -28,19 +33,22 @@ type CalendarDayProps = NativeStackScreenProps<
 
 const CalendarDay: React.FC<CalendarDayProps> = ({ route }) => {
     const { date } = route.params;
-    const theme = useTheme();
     const navigation =
         useNavigation<StackNavigationProp<RootStackParamList, 'CalendarDay'>>();
 
     return (
         <NavigationSafeAreaView>
             <YStack
+                backgroundColor={'white'}
                 flex={1}
                 alignItems="stretch"
                 justifyContent="flex-start"
                 gap="$4"
             >
-                <H2>{date.dateString}</H2>
+                <H3 alignSelf="center" marginTop={10}>
+                    {date.dateString}
+                </H3>
+                <H6 alignSelf="center">{'Wednesday'}</H6>
                 <ScrollView>
                     <YGroup alignSelf="center" size="$4">
                         <YGroup.Item>
