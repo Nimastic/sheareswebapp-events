@@ -18,23 +18,53 @@ import {
 } from 'tamagui';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 
 type CalendarDayProps = NativeStackScreenProps<
     RootStackParamList,
     'CalendarDay'
 >;
 
+type CalendarEventFormData = {
+    name: string;
+    description: string;
+};
+
 const CalendarEventNew: React.FC<CalendarDayProps> = ({ route }) => {
+    const navigation =
+        useNavigation<
+            StackNavigationProp<RootStackParamList, 'CalendarEventNew'>
+        >();
     const { date } = route.params;
     const [status, setStatus] = useState<'off' | 'submitting' | 'submitted'>(
         'off'
     );
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<CalendarEventFormData>({
+        defaultValues: {
+            name: '',
+            description: '',
+        },
+    });
+
+    const onSubmit = (data: CalendarEventFormData) => {
+        setStatus('submitting');
+        console.log(data);
+        // submit...
+
+        setStatus('submitted');
+        navigation.goBack();
+    };
+
     return (
         <NavigationSafeAreaView>
             <Form
                 alignItems="center"
                 padding="$5"
-                onSubmit={() => setStatus('submitting')}
+                onSubmit={handleSubmit(onSubmit)}
                 height="100%"
                 backgroundColor="$background"
             >
@@ -43,16 +73,44 @@ const CalendarEventNew: React.FC<CalendarDayProps> = ({ route }) => {
                 <XStack alignItems="center">
                     <YStack width="100%">
                         <Label htmlFor="name">Name</Label>
-                        <Input id="name" placeholder="Enter event name..." />
+                        <Controller
+                            control={control}
+                            rules={{ required: true }}
+                            render={({
+                                field: { onChange, onBlur, value },
+                            }) => (
+                                <Input
+                                    id="name"
+                                    placeholder="Enter event name..."
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
+                                    value={value}
+                                />
+                            )}
+                            name="name"
+                        />
+                        {/* <Input id="name" placeholder="Enter event name..." /> */}
                     </YStack>
                 </XStack>
                 <XStack alignItems="center">
                     <YStack width="100%">
                         <Label htmlFor="name">Description</Label>
-                        <TextArea
-                            id="description"
-                            placeholder="Enter event description..."
-                            textAlignVertical="top"
+                        <Controller
+                            control={control}
+                            rules={{ required: true }}
+                            render={({
+                                field: { onChange, onBlur, value },
+                            }) => (
+                                <TextArea
+                                    id="description"
+                                    placeholder="Enter event description..."
+                                    textAlignVertical="top"
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
+                                    value={value}
+                                />
+                            )}
+                            name="description"
                         />
                     </YStack>
                 </XStack>
@@ -76,6 +134,7 @@ const CalendarEventNew: React.FC<CalendarDayProps> = ({ route }) => {
                         size="$6"
                         position="absolute"
                         bottom={20}
+                        disabled={status === 'submitting'}
                     >
                         Add Event
                     </Button>
