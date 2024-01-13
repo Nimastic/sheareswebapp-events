@@ -13,4 +13,7 @@ type RootStackParamList = {
     CalendarDay: {
         date: DateData;
     };
+    CalendarEventNew: {
+        date: DateData;
+    };
 };

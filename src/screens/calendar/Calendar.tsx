@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../types/navigation';
 import { useEffect, useState } from 'react';
 import { MarkedDates } from 'react-native-calendars/src/types';
-import { useTheme } from 'tamagui';
 
 const Calendar: React.FC = () => {
     const navigation =

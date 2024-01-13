@@ -29,6 +29,7 @@ import config from './tamagui.config';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import CalendarDay from './src/screens/calendar/CalendarDay';
 import { RootStackParamList } from './src/types/navigation';
+import CalendarEventNew from './src/screens/calendar/CalendarEventNew';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -165,6 +166,11 @@ export default function App() {
                                     <Stack.Screen
                                         name="CalendarDay"
                                         component={CalendarDay}
+                                        options={{ headerShown: false }}
+                                    />
+                                    <Stack.Screen
+                                        name="CalendarEventNew"
+                                        component={CalendarEventNew}
                                         options={{ headerShown: false }}
                                     />
                                 </>

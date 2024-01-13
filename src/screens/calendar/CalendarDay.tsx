@@ -11,8 +11,10 @@ import {
     H5,
     H6,
     ListItem,
+    Paragraph,
     ScrollView,
     Separator,
+    Text,
     Theme,
     YGroup,
     YStack,
@@ -70,7 +72,9 @@ const CalendarDay: React.FC<CalendarDayProps> = ({ route }) => {
                                 subTitle="19:00 - 22:00"
                                 iconAfter={ChevronRight}
                             >
-                                <H6>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</H6>
+                                <H6 numberOfLines={1}>
+                                    aaaaaaaaaaaaaaaaaaaaaaaaaaaadaaaaa123412351325
+                                </H6>
                             </ListItem>
                         </YGroup.Item>
                         <YGroup.Item>
@@ -169,6 +173,9 @@ const CalendarDay: React.FC<CalendarDayProps> = ({ route }) => {
                 size="$6"
                 position="absolute"
                 bottom={20}
+                onPress={async () =>
+                    navigation.navigate('CalendarEventNew', { date: date })
+                }
             >
                 Add Event
             </Button>
