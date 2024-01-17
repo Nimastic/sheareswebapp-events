@@ -8,17 +8,18 @@ import {
     Form,
     H3,
     H6,
-    Input,
     Label,
+    ScrollView,
     Spinner,
-    TextArea,
     XStack,
     YStack,
-    useLabelContext,
 } from 'tamagui';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import TimeInput from '../../components/Forms/TimeInput';
+import TextInput from '../../components/Forms/TextInput';
+import TextAreaInput from '../../components/Forms/TextAreaInput';
 
 type CalendarDayProps = NativeStackScreenProps<
     RootStackParamList,
@@ -28,6 +29,8 @@ type CalendarDayProps = NativeStackScreenProps<
 type CalendarEventFormData = {
     name: string;
     description: string;
+    startTime: string;
+    endTime: string;
 };
 
 const CalendarEventNew: React.FC<CalendarDayProps> = ({ route }) => {
@@ -41,6 +44,7 @@ const CalendarEventNew: React.FC<CalendarDayProps> = ({ route }) => {
     );
     const {
         control,
+        setValue,
         handleSubmit,
         formState: { errors },
     } = useForm<CalendarEventFormData>({
@@ -63,65 +67,36 @@ const CalendarEventNew: React.FC<CalendarDayProps> = ({ route }) => {
         <NavigationSafeAreaView>
             <Form
                 alignItems="center"
-                padding="$5"
+                paddingVertical="$5"
                 onSubmit={handleSubmit(onSubmit)}
                 height="100%"
-                backgroundColor="$background"
             >
                 <H3 alignSelf="center">Create New Event</H3>
                 <H6 alignSelf="center">{date.dateString}</H6>
-                <XStack alignItems="center">
-                    <YStack width="100%">
-                        <Label htmlFor="name">Name</Label>
-                        <Controller
-                            control={control}
-                            rules={{ required: true }}
-                            render={({
-                                field: { onChange, onBlur, value },
-                            }) => (
-                                <Input
-                                    id="name"
-                                    placeholder="Enter event name..."
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={value}
-                                />
-                            )}
-                            name="name"
-                        />
-                        {/* <Input id="name" placeholder="Enter event name..." /> */}
-                    </YStack>
-                </XStack>
-                <XStack alignItems="center">
-                    <YStack width="100%">
-                        <Label htmlFor="name">Description</Label>
-                        <Controller
-                            control={control}
-                            rules={{ required: true }}
-                            render={({
-                                field: { onChange, onBlur, value },
-                            }) => (
-                                <TextArea
-                                    id="description"
-                                    placeholder="Enter event description..."
-                                    textAlignVertical="top"
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={value}
-                                />
-                            )}
-                            name="description"
-                        />
-                    </YStack>
-                </XStack>
-                {/* <XStack alignItems="center">
+                <ScrollView width="100%" paddingHorizontal="$5">
+                    <XStack alignItems="flex-start">
+                        <YStack flex={1}>
+                            <Label htmlFor="name">Name</Label>
+                            <TextInput name="name" placeholder="Enter event name..." control={control} />
+                        </YStack>
                     </XStack>
-                    <XStack alignItems="center">
-                        <Input flex={1} id="name" placeholder="Event Name" />
+                    <XStack alignItems="flex-start">
+                        <YStack flex={1}>
+                            <Label htmlFor="description">Description</Label>
+                            <TextAreaInput name="description" placeholder="Enter event description..." control={control} />
+                        </YStack>
                     </XStack>
-                    <XStack alignItems="center">
-                        <Input flex={1} id="name" placeholder="Event Name" />
-                    </XStack> */}
+                    <XStack alignItems="flex-start" gap="$4">
+                        <YStack flex={1}>
+                            <Label htmlFor="startTime">Start Time</Label>
+                            <TimeInput name="startTime" placeholder="Enter start time..." setValue={setValue} control={control} />
+                        </YStack>
+                        <YStack flex={1}>
+                            <Label htmlFor="endTime">End Time</Label>
+                            <TimeInput name="endTime" placeholder="Enter end time..." setValue={setValue} control={control} />
+                        </YStack>
+                    </XStack>
+                </ScrollView>
                 <Form.Trigger asChild disabled={status !== 'off'}>
                     <Button
                         theme="orange"
