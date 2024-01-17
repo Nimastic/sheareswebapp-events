@@ -5,7 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import Home from './src/screens/home/Home';
 import Login from './src/screens/login/Login';
 import Calendar from './src/screens/calendar/Calendar';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import Loading from './src/screens/loading/Loading';
 import * as auth from './src/auth/reducer';
 import AuthContext from './src/auth/AuthContext';
@@ -41,16 +41,17 @@ export default function App() {
     const [fontsLoaded] = useFonts({
         NotoSans: require('./src/fonts/NotoSans-VariableFont_wdth,wght.ttf'),
     });
+    const [authLoaded, setAuthLoaded] = useState(false)
 
     // Once fonts loaded, load the app (hide splash screen)
     useEffect(() => {
         const checkFontsLoaded = async () => {
-            if (fontsLoaded) {
+            if (fontsLoaded && authLoaded) {
                 await SplashScreen.hideAsync();
             }
         };
         checkFontsLoaded();
-    }, [fontsLoaded]);
+    }, [fontsLoaded, authLoaded]);
 
     const [request, response, promptAsync] = Google.useAuthRequest({
         iosClientId: process.env.EXPO_PUBLIC_IOS_CLIENT_ID,
@@ -72,9 +73,11 @@ export default function App() {
             if (user) {
                 // await AsyncStorage.setItem("user", JSON.stringify(user.refreshToken));
                 dispatch(signInAction(user));
+                console.log('User authenticated');
             } else {
                 console.log('User not authenticated');
             }
+            setAuthLoaded(true);
         });
 
         return () => unsub();
