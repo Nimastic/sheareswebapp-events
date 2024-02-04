@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import Home from './src/screens/home/Home';
+import Announcement from './src/screens/announcements/Announcement';
 import Login from './src/screens/login/Login';
 import Calendar from './src/screens/calendar/Calendar';
 import { useEffect, useReducer, useState } from 'react';
@@ -30,6 +31,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import CalendarDay from './src/screens/calendar/CalendarDay';
 import { RootStackParamList } from './src/types/navigation';
 import CalendarEventNew from './src/screens/calendar/CalendarEventNew';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Feather from 'react-native-vector-icons/Feather';
+import Entypo from 'react-native-vector-icons/Entypo';
+
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -130,6 +135,26 @@ export default function App() {
         },
     };
 
+    const Tab = createBottomTabNavigator();
+
+    const BottomTabNavigator = () => {
+    return <Tab.Navigator screenOptions ={{
+            tabBarLabelPosition: "below-icon",
+            tabBarShowLabel: true,
+            tabBarActiveTintColor: "#F18437",
+            tabBarInactiveTintColor: "black",
+            headerShown: false,
+    
+        }}>
+        <Tab.Screen name="Home" component={Home} options= {{
+                tabBarIcon: ({ color, size }) => <Entypo name="home" color={color} size={size}/>
+            }}/>
+        <Tab.Screen name="Calendar" component={Calendar} options= {{
+                tabBarIcon: ({ color, size }) => <Feather name="user" color={color} size={size}/>
+            }}/>
+    </Tab.Navigator>
+}
+
     if (!fontsLoaded) return null;
 
     if (state.isLoading) return <Loading />;
@@ -157,14 +182,24 @@ export default function App() {
                             ) : (
                                 <>
                                     <Stack.Screen
+                                        name="Tab"
+                                        component={BottomTabNavigator}
+                                        options={{ headerShown: false }}
+                                    />
+                                    <Stack.Screen
                                         name="Home"
                                         component={Home}
-                                        options={{ headerShown: false }}
+                                        options={{ headerTitle: '' }}
+                                    />
+                                    <Stack.Screen
+                                        name="Announcement"
+                                        component={Announcement}
+                                        options={{ headerTitle: '' }}
                                     />
                                     <Stack.Screen
                                         name="Calendar"
                                         component={Calendar}
-                                        options={{ headerShown: false }}
+                                        // options={{ headerShown: false }}
                                     />
                                     <Stack.Screen
                                         name="CalendarDay"
@@ -176,6 +211,7 @@ export default function App() {
                                         component={CalendarEventNew}
                                         options={{ headerShown: false }}
                                     />
+                                    
                                 </>
                             )}
                         </Stack.Navigator>

@@ -24,6 +24,7 @@ const themes = {
         background: tokens.color.white,
         backgroundPress: tokens.color.lightgray,
         color: tokens.color.black,
+        orange: '#F18437',
     },
     light_orange: {
         background: tokens.color.orangeLight,

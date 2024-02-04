@@ -16,4 +16,6 @@ type RootStackParamList = {
     CalendarEventNew: {
         date: DateData;
     };
+    Tab: undefined;
+    Announcement: undefined;
 };
