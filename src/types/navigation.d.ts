@@ -18,4 +18,23 @@ type RootStackParamList = {
     };
     Tab: undefined;
     Announcement: undefined;
+    EventDetail: EventDetailRouteParams;
+    EventHighlights: EventHighlightsParams;
+};
+
+export type Event = {
+    id: string;
+    title: string;
+    description: string;
+    imageUrl: string;
+    date: string
+};
+
+export type EventDetailRouteParams = {
+    event: Event;
+    events: Event[];
+};
+
+export type EventHighlightsParams = {
+    events: Event[];
 };
