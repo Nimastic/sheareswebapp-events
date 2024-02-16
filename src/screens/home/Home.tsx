@@ -1,18 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { useTheme } from '@tamagui/core';
-import { useContext, useState } from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
-import AuthContext from '../../auth/AuthContext';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../../types/navigation';
-import { H1, H2, H3, H6, YStack, XStack, Text } from 'tamagui';
-import ModuleScreen from '../modules/ModuleScreen';
-import { User, Announcement } from '../../types/interfaces';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTheme } from '@tamagui/core';
+import { StatusBar } from 'expo-status-bar';
+import { useContext, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { H1, H3, Text } from 'tamagui';
+import AuthContext from '../../auth/AuthContext';
+import EventsCarousel from '../../components/Home/EventsCarousel';
 import HomeAnnouncement from '../../components/Home/HomeAnnouncement';
-
-
+import { Announcement, User } from '../../types/interfaces';
+import ModuleScreen from '../modules/ModuleScreen';
 
 const Home: React.FC = () => {
     const theme = useTheme();
@@ -26,17 +22,43 @@ const Home: React.FC = () => {
         date: "05/02/2024",
     }
     const [announcements, setAnnouncments] = useState<Announcement[]>([dummyAnnouncement]);
+    const [events, setEvents] = useState([
+        {
+            id: 'event-1',
+            title: 'Event 1',
+            description: 'This is the first event',
+            // imageUrl: 'https://example.com/event1.jpg',
+            imageUrl: 'https://www.nus.edu.sg/osa/images/default-source/osa/residential-options/2017-sheares-hall-2.jpg?sfvrsn=756f3508_2',
+            date: '2024-02-15'
+        },
+        {
+            id: 'event-2',
+            title: 'Event 2',
+            description: 'This is the second event',
+            // imageUrl: 'https://example.com/event2.jpg',
+            imageUrl: 'https://i.ytimg.com/vi/DKEJAON5TFk/maxresdefault.jpg',
+            date: '2024-03-10'
+        },
+        {
+            id: 'event-3',
+            title: 'Event 3',
+            description: 'This is the third event',
+            // imageUrl: 'https://example.com/event3.jpg',
+            imageUrl: 'https://nus.edu.sg/osa/images/default-source/sheares/facilities-and-rooms/5.png?sfvrsn=74017eae_2',
+            date: '2024-03-20'
+        },
+        // ... more events
+    ]);
 
 
 
     return (
         <ModuleScreen>
             <H1 style={styles.title}>Hey {user.name}!</H1>
-            <YStack>
-                <H3>Announcements</H3>
-                <HomeAnnouncement announcement={announcements[0]}/>
-                <H3>Event Highlights</H3>
-            </YStack>
+            <H3>Announcements</H3>
+            <HomeAnnouncement announcement={announcements[0]}/>
+            <H3>Event Highlights</H3>
+            <EventsCarousel events={events} navigation={navigation} />
             <Text>Open up App.js to start working on yopur app!home</Text>
             <StatusBar style="auto" />
             <Text onPress={async () => navigation.navigate('Calendar')}>
@@ -52,7 +74,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        marginVertical: 40
+        marginVertical: 40,
     },
     title: {
         fontWeight: "600"
@@ -69,7 +91,7 @@ const styles = StyleSheet.create({
         color: "white",
         padding: 10,
         paddingHorizontal: 20
-    }
+    },
 });
 
 export default Home;

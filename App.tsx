@@ -1,21 +1,9 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as Google from 'expo-auth-session/providers/google';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import Home from './src/screens/home/Home';
-import Announcement from './src/screens/announcements/Announcement';
-import Login from './src/screens/login/Login';
-import Calendar from './src/screens/calendar/Calendar';
-import { useEffect, useReducer, useState } from 'react';
-import Loading from './src/screens/loading/Loading';
-import * as auth from './src/auth/reducer';
-import AuthContext from './src/auth/AuthContext';
-import {
-    restoreTokenAction,
-    signInAction,
-    signOutAction,
-} from './src/auth/actions';
-import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import {
     GoogleAuthProvider,
@@ -24,16 +12,30 @@ import {
     signInWithCredential,
     signOut,
 } from 'firebase/auth';
-import { firebaseAuth } from './firebaseConfig';
-import { TamaguiProvider } from 'tamagui';
-import config from './tamagui.config';
+import { useEffect, useReducer, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import CalendarDay from './src/screens/calendar/CalendarDay';
-import { RootStackParamList } from './src/types/navigation';
-import CalendarEventNew from './src/screens/calendar/CalendarEventNew';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Feather from 'react-native-vector-icons/Feather';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
+import { TamaguiProvider } from 'tamagui';
+import { firebaseAuth } from './firebaseConfig';
+import AuthContext from './src/auth/AuthContext';
+import {
+    restoreTokenAction,
+    signInAction,
+    signOutAction,
+} from './src/auth/actions';
+import * as auth from './src/auth/reducer';
+import Announcement from './src/screens/announcements/Announcement';
+import Calendar from './src/screens/calendar/Calendar';
+import CalendarDay from './src/screens/calendar/CalendarDay';
+import CalendarEventNew from './src/screens/calendar/CalendarEventNew';
+import EventDetail from './src/screens/event/EventDetail';
+import EventHighlights from './src/screens/event/EventHighlights';
+import Home from './src/screens/home/Home';
+import Loading from './src/screens/loading/Loading';
+import Login from './src/screens/login/Login';
+import { RootStackParamList } from './src/types/navigation';
+import config from './tamagui.config';
 
 
 // Keep the splash screen visible while we fetch resources
@@ -211,7 +213,16 @@ export default function App() {
                                         component={CalendarEventNew}
                                         options={{ headerShown: false }}
                                     />
-                                    
+                                    <Stack.Screen
+                                        name="EventHighlights"
+                                        component={EventHighlights}
+                                        options={{ headerTitle: 'Event Highlights' }}
+                                    />
+                                    <Stack.Screen
+                                        name="EventDetail"
+                                        component={EventDetail}
+                                        options={{ headerTitle: 'Event Detail' }}
+                                    />
                                 </>
                             )}
                         </Stack.Navigator>
